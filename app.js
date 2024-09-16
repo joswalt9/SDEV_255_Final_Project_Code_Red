@@ -39,7 +39,7 @@ app.get("/course/:index", (req, res) => {
   const courses = getCourses();
   const courseIndex = parseInt(req.params.index, 10);
 
-  console.log(`Requested course index: ${courseIndex}`); // Debug Line
+  console.log(`Requested course index: ${courseIndex}`);
 
   if (courseIndex >= 0 && courseIndex < courses.length) {
     const course = courses[courseIndex];
