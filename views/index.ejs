@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Courses</title>
-  </head>
+  <%- include("./partials/header.ejs") %>
   <body>
     <h1>College Courses</h1>
     <%- include("./partials/nav.ejs") %>
+    <h2>Course Index</h2>
+
+    <!-- Course Index -->
+    <% if (courses && courses.length > 0) { %>
+    <ul>
+      <% courses.forEach((course, index) => { %>
+      <li>
+        <strong><a href="/course/<%= index %>"><%= course.name %></a></strong> -
+        <%= course.description %><br />
+        (<b>Subject:</b> <%= course.subject %>, <b>Credits:</b> <%=
+        course.credits %>)
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No courses available yet.</p>
+    <% } %>
+
+    <a href="/addcourse">Add New Course</a>
   </body>
 </html>

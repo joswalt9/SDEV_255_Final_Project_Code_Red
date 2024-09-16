@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Courses</title>
-  </head>
+  <%- include("./partials/header.ejs") %>
   <body>
-    <h1>Add Course PlaceHolder</h1>
+    <h1>Add Course</h1>
     <%- include("./partials/nav.ejs") %>
+    <h2>Add a New Course</h2>
+
+    <!-- Add a course-->
+
+    <form action="/addcourse" method="POST">
+      <label for="name">Course Name:</label>
+      <input type="text" name="name" required /><br />
+
+      <label for="description">Description:</label>
+      <textarea name="description" required></textarea><br />
+
+      <label for="subject">Subject Area:</label>
+      <input type="text" name="subject" required /><br />
+
+      <label for="credits">Credits:</label>
+      <input type="number" name="credits" required /><br />
+
+      <button type="submit">Add Course</button>
+    </form>
+
+    <a href="/">Back to Courses</a>
   </body>
 </html>
