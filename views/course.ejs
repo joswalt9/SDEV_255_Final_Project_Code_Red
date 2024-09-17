@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title><%= course.name %></title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <%- include("./partials/nav.ejs") %>
     <h1><%= course.name %></h1>
     <p><strong>Description:</strong> <%= course.description %></p>
     <p><strong>Subject:</strong> <%= course.subject %></p>
