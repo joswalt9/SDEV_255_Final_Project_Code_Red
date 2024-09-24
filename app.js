@@ -6,7 +6,7 @@ const Course = require("./models/course");
 
 // Connect to MongoDB
 const dbURI =
-  "mongodb+srv://netninja:test1234@nodetuts.spyxg.mongodb.net/collegecourses?retryWrites=true&w=majority";
+  "mongodb+srv://netninja:test1234@nodetuts.spyxg.mongodb.net/collegecourse?retryWrites=true&w=majority";
 
 mongoose
   .connect(dbURI)
