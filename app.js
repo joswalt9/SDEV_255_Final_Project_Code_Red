@@ -1,9 +1,23 @@
 const express = require("express");
 const app = express();
 const PORT = 3000;
-const fs = require("fs");
-const path = require("path");
-const coursesFilePath = path.join(__dirname, "courses.json");
+const mongoose = require("mongoose");
+const Course = require("./models/course");
+
+// Connect to MongoDB
+const dbURI =
+  "mongodb+srv://netninja:test1234@nodetuts.spyxg.mongodb.net/collegecourses?retryWrites=true&w=majority";
+
+mongoose
+  .connect(dbURI)
+  .then((result) => {
+    app.listen(PORT, () => {
+      console.log(
+        `Connected to DB and Server is running on http://localhost:${PORT}`
+      );
+    });
+  })
+  .catch((err) => console.log(err));
 
 // Middleware
 app.use(express.json());
@@ -15,58 +29,50 @@ app.use(express.static("public"));
 // Register View Engine
 app.set("view engine", "ejs");
 
-// Listen for Requests
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-// Get Courses Function
-function getCourses() {
-  if (fs.existsSync(coursesFilePath)) {
-    const data = fs.readFileSync(coursesFilePath, "utf8");
-    return JSON.parse(data);
-  }
-  return [];
-}
-
-// Save Courses Function
-function saveCourses(courses) {
-  fs.writeFileSync(coursesFilePath, JSON.stringify(courses, null, 2), "utf8");
-}
-
 // Get Individual Course
-app.get("/course/:index", (req, res) => {
-  const courses = getCourses();
-  const courseIndex = parseInt(req.params.index, 10);
-
-  console.log(`Requested course index: ${courseIndex}`);
-
-  if (courseIndex >= 0 && courseIndex < courses.length) {
-    const course = courses[courseIndex];
-    res.render("course", { course });
-  } else {
-    res.status(404).render("404");
+app.get("/course/:id", async (req, res) => {
+  console.log("Fetching course with ID:", req.params.id);
+  try {
+    const course = await Course.findById(req.params.id);
+    console.log("Course found:", course);
+    if (course) {
+      res.render("course", { course });
+    } else {
+      res.status(404).render("404");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
   }
 });
 
 // Add Course
-app.post("/addcourse", (req, res) => {
-  const courses = getCourses();
-  const newCourse = {
+app.post("/addcourse", async (req, res) => {
+  const newCourse = new Course({
     name: req.body.name,
     description: req.body.description,
     subject: req.body.subject,
     credits: req.body.credits,
-  };
-  courses.push(newCourse);
-  saveCourses(courses);
-  res.redirect("/");
+  });
+
+  try {
+    await newCourse.save();
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
 });
 
 // Get Homepage
-app.get("/", (req, res) => {
-  const courses = getCourses(); // Fetch the updated courses from the JSON file
-  res.render("index", { courses });
+app.get("/", async (req, res) => {
+  try {
+    const courses = await Course.find();
+    res.render("index", { courses });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
 });
 
 // Get Add Course page

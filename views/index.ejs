@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("./partials/header.ejs") %>
+  <%- include("partials/header.ejs") %>
   <body>
     <h1>College Courses</h1>
-    <%- include("./partials/nav.ejs") %>
+    <%- include("partials/nav.ejs") %>
+
     <h2>Course Index</h2>
 
     <!-- Course Index -->
     <% if (courses && courses.length > 0) { %>
     <ul>
-      <% courses.forEach((course, index) => { %>
+      <% courses.forEach((course) => { %>
       <li>
-        <strong><a href="/course/<%= index %>"><%= course.name %></a></strong> -
-        <%= course.description %><br />
+        <strong
+          ><a href="/course/<%= course._id %>"><%= course.name %></a></strong
+        >
+        - <%= course.description %><br />
         (<b>Subject:</b> <%= course.subject %>, <b>Credits:</b> <%=
         course.credits %>)
       </li>
