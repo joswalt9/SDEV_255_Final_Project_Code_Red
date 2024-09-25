@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title><%= course.name %></title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
+  <%- include("partials/header.ejs") %>
   <body>
     <%- include("./partials/nav.ejs") %>
 
-    <h1><%= course.name %></h1>
-    <p><strong>Description:</strong> <%= course.description %></p>
-    <p><strong>Subject:</strong> <%= course.subject %></p>
-    <p><strong>Credits:</strong> <%= course.credits %></p>
+    <div class="w-50 p-3 mx-auto bg-white rounded">
+      <h1><%= course.name %></h1>
+      <p><strong>Description:</strong> <%= course.description %></p>
+      <p><strong>Subject:</strong> <%= course.subject %></p>
+      <p><strong>Credits:</strong> <%= course.credits %></p>
 
-    <a href="/course/edit/<%= course._id %>">Edit Course</a>
+      <div class="d-flex mb-3">
+      <a href="/course/edit/<%= course._id %>" class="btn btn-secondary">Edit Course</a>
 
-    <a href="#" id="delete-link" class="delete-link">Delete Course</a>
+      <a href="#" id="delete-link" class="delete-link btn btn-danger">Delete Course</a>
+      
+      <a href="/" class="btn btn-primary ms-auto">Back to Course List</a>
+      </div>
+    </div>
+
+
 
     <script>
       const deleteLink = document.getElementById("delete-link");
@@ -42,6 +46,6 @@
       });
     </script>
 
-    <a href="/">Back to Course List</a>
+    
   </body>
 </html>

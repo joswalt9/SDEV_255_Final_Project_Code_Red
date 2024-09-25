@@ -1,17 +1,30 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  display: flex;
+  /* margin: 0;
+  padding: 0; */
+  background-color: #D8D8D8;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
-h1,
+/* Nav */
+/* nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+} */
+
+
+/* h1,
 h2 {
   color: #333;
-}
+} */
 
 form {
   background-color: #fff;
@@ -56,7 +69,7 @@ button:hover {
   background-color: #0056b3;
 } */
 
-a {
+/* a {
   display: inline-block;
   margin-top: 20px;
   color: #007bff;
@@ -65,19 +78,7 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-/* Nav */
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-nav ul li {
-  margin-right: 20px; /* Spacing between items */
-}
+} */
 
 /* Responsive Design */
 @media (max-width: 600px) {
