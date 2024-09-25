@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= course.name %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <form action="/course/edit/<%= course._id %>" method="POST">
+      <label for="name">Course Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="<%= course.name %>"
+        required
+      />
+
+      <label for="description">Description:</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="10"
+        cols="50"
+        required
+      >
+<%= course.description %></textarea
+      >
+
+      <label for="subject">Subject Area:</label>
+      <input
+        type="text"
+        id="subject"
+        name="subject"
+        value="<%= course.subject %>"
+        required
+      />
+
+      <label for="credits">Credits:</label>
+      <input
+        type="number"
+        id="credits"
+        name="credits"
+        value="<%= course.credits %>"
+        required
+      />
+
+      <button type="submit">Update Course</button>
+    </form>
+  </body>
+</html>

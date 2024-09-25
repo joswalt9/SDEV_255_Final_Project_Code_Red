@@ -31,10 +31,8 @@ app.set("view engine", "ejs");
 
 // Get Individual Course
 app.get("/course/:id", async (req, res) => {
-  console.log("Fetching course with ID:", req.params.id);
   try {
     const course = await Course.findById(req.params.id);
-    console.log("Course found:", course);
     if (course) {
       res.render("course", { course });
     } else {
@@ -58,6 +56,63 @@ app.post("/addcourse", async (req, res) => {
   try {
     await newCourse.save();
     res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Delete a course
+app.delete("/course/:id", async (req, res) => {
+  try {
+    const course = await Course.findByIdAndDelete(req.params.id);
+    if (course) {
+      res.status(200).json({ redirect: "/" }); // Redirect to homepage after deletion
+    } else {
+      res.status(404).json({ error: "Course not found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+// Edit course
+app.get("/course/edit/:id", async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id);
+    if (course) {
+      res.render("editcourse", { course });
+    } else {
+      res.status(404).render("404");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Update course
+app.post("/course/edit/:id", async (req, res) => {
+  try {
+    const updatedCourse = {
+      name: req.body.name,
+      description: req.body.description,
+      subject: req.body.subject,
+      credits: req.body.credits,
+    };
+
+    const course = await Course.findByIdAndUpdate(
+      req.params.id,
+      updatedCourse,
+      { new: true }
+    );
+
+    if (course) {
+      res.redirect(`/course/${course._id}`);
+    } else {
+      res.status(404).send("Course not found");
+    }
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");

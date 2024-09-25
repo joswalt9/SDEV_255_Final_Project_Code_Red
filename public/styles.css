@@ -42,7 +42,7 @@ textarea {
   box-sizing: border-box;
 }
 
-button {
+/* button {
   background-color: #007bff;
   color: white;
   padding: 10px 15px;
@@ -54,7 +54,7 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
+} */
 
 a {
   display: inline-block;
