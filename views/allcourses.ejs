@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/header.ejs") %>
+  <body>
+    <%- include("partials/nav.ejs") %>
+
+    <div class="w-50 p-3 mx-auto bg-white">
+      <h2>Course Index</h2>
+
+      <!-- Course Index -->
+      <% if (courses && courses.length > 0) { %>
+      <ul class="list-group">
+        <% courses.forEach((course) => { %>
+        <li class="m-3 list-group-item bg-light">
+          <strong
+            ><a href="/course/<%= course._id %>"><%= course.name %></a></strong
+          >
+          - <%= course.description %><br />
+          (<b>Subject:</b> <%= course.subject %>, <b>Credits:</b> <%=
+          course.credits %>)
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <p>No courses available yet.</p>
+      <% } %>
+    </div>
+  </body>
+</html>

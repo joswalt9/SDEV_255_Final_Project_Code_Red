@@ -120,10 +120,15 @@ app.post("/course/edit/:id", async (req, res) => {
 });
 
 // Get Homepage
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
+  res.render("index");
+});
+
+// Get All Courses Page
+app.get("/allcourses", async (req, res) => {
   try {
     const courses = await Course.find();
-    res.render("index", { courses });
+    res.render("allcourses", { courses });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
