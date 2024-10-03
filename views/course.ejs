@@ -11,15 +11,19 @@
       <p><strong>Credits:</strong> <%= course.credits %></p>
 
       <div class="d-flex mb-3">
-      <a href="/course/edit/<%= course._id %>" class="btn btn-secondary">Edit Course</a>
+        <% if (user.isTeacher) { %>
+        <a href="/course/edit/<%= course._id %>" class="btn btn-secondary"
+          >Edit Course</a
+        >
 
-      <a href="#" id="delete-link" class="delete-link btn btn-danger">Delete Course</a>
-      
-      <a href="/" class="btn btn-primary ms-auto">Back to Course List</a>
+        <a href="#" id="delete-link" class="delete-link btn btn-danger"
+          >Delete Course</a
+        >
+        <% } %>
+
+        <a href="/" class="btn btn-primary ms-auto">Back to Course List</a>
       </div>
     </div>
-
-
 
     <script>
       const deleteLink = document.getElementById("delete-link");
@@ -45,7 +49,5 @@
         }
       });
     </script>
-
-    
   </body>
 </html>
