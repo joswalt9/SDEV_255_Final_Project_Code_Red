@@ -10,6 +10,7 @@ const {
   checkUser,
   requireTeacher,
 } = require("./middleware/authMiddleware");
+const scheduleRoutes = require("./routes/scheduleRoutes");
 
 // Connect to MongoDB
 const dbURI =
@@ -42,6 +43,9 @@ app.set("view engine", "ejs");
 
 // Authentication Routes
 app.use(authRoutes);
+
+// Schedule Routes
+app.use(scheduleRoutes);
 
 // Routes for Courses
 
@@ -80,6 +84,11 @@ app.get("/", (req, res) => {
 // Get Add Course page (protected for teachers)
 app.get("/addcourse", requireAuth, requireTeacher, (req, res) => {
   res.render("addcourse");
+});
+
+// Get Schedule builder page(CHECK)
+app.get("/schedule", requireAuth, (req, res) => {
+  res.render("schedule");
 });
 
 // 404 Page (Must be at the bottom of code)

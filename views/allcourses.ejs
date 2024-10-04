@@ -18,6 +18,14 @@
           - <%= course.description %><br />
           (<b>Subject:</b> <%= course.subject %>, <b>Credits:</b> <%=
           course.credits %>)
+
+          <!-- Add to Schedule Form -->
+          <form action="/schedule/add" method="POST" class="mt-2">
+            <input type="hidden" name="courseId" value="<%= course._id %>" />
+            <button type="submit" class="btn btn-primary">
+              Add to Schedule
+            </button>
+          </form>
         </li>
         <% }) %>
       </ul>

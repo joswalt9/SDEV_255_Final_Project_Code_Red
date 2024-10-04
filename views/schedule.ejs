@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/header.ejs") %>
+  <body>
+    <%- include("partials/nav.ejs") %>
+
+    <div class="container mt-4">
+      <h2 class="text-center mb-4">Your Schedule</h2>
+      <ul class="list-group">
+        <% courses.forEach(course => { %>
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <div>
+            <strong><%= course.name %></strong> - <%= course.credits %> credits
+          </div>
+          <div>
+            <form
+              action="/schedule/remove"
+              method="POST"
+              style="display: inline"
+            >
+              <input type="hidden" name="courseId" value="<%= course._id %>" />
+              <a
+                href="javascript:void(0);"
+                onclick="this.closest('form').submit();"
+                class="text-danger small remove-link"
+              >
+                &#10006; Remove
+              </a>
+            </form>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+  </body>
+</html>

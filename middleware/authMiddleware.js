@@ -6,12 +6,14 @@ const requireAuth = (req, res, next) => {
 
   // Check json web token exists and is verified
   if (token) {
-    jwt.verify(token, "net ninja secret", (err, decodedToken) => {
+    jwt.verify(token, "net ninja secret", async (err, decodedToken) => {
       if (err) {
         console.log(err.message);
         res.redirect("/login");
       } else {
-        console.log(decodedToken);
+        // Attach user to request
+        const user = await User.findById(decodedToken.id);
+        req.user = user; // Attach user to request
         next();
       }
     });
@@ -30,9 +32,9 @@ const requireTeacher = (req, res, next) => {
         console.log(err.message);
         res.redirect("/login");
       } else {
-        let user = await User.findById(decodedToken.id);
+        const user = await User.findById(decodedToken.id);
         if (user && user.isTeacher) {
-          // If the user is a teacher, proceed to the route
+          req.user = user; // Attach user to request
           next();
         } else {
           // If the user is not a teacher, deny access
@@ -56,8 +58,7 @@ const checkUser = (req, res, next) => {
         res.locals.user = null;
         next();
       } else {
-        console.log(decodedToken);
-        let user = await User.findById(decodedToken.id);
+        const user = await User.findById(decodedToken.id);
         res.locals.user = user;
         next();
       }
