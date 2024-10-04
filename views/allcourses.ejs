@@ -12,20 +12,23 @@
       <ul class="list-group">
         <% courses.forEach((course) => { %>
         <li class="m-3 list-group-item bg-light">
-          <strong
-            ><a href="/course/<%= course._id %>"><%= course.name %></a></strong
-          >
+          <strong>
+            <a href="/course/<%= course._id %>"><%= course.name %></a>
+          </strong>
           - <%= course.description %><br />
           (<b>Subject:</b> <%= course.subject %>, <b>Credits:</b> <%=
           course.credits %>)
 
           <!-- Add to Schedule Form -->
+          <% if (user && !user.isTeacher) { %>
+          <!-- Show only for students -->
           <form action="/schedule/add" method="POST" class="mt-2">
             <input type="hidden" name="courseId" value="<%= course._id %>" />
             <button type="submit" class="btn btn-primary">
               Add to Schedule
             </button>
           </form>
+          <% } %>
         </li>
         <% }) %>
       </ul>
