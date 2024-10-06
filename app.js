@@ -86,7 +86,7 @@ app.get("/addcourse", requireAuth, requireTeacher, (req, res) => {
   res.render("addcourse");
 });
 
-// Get Schedule builder page(CHECK)
+// Get Schedule builder page
 app.get("/schedule", requireAuth, (req, res) => {
   res.render("schedule");
 });
