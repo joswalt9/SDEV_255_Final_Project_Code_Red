@@ -4,7 +4,7 @@
   <body>
     <%- include("./partials/nav.ejs") %>
 
-    <div class="w-50 p-3 mx-auto">
+    <div class="w-50 p-3 mx-auto bg-info">
       <h1>Edit Course</h1>
       <form action="/course/edit/<%= course._id %>" method="POST">
         <label for="name">Course Name:</label>

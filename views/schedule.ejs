@@ -4,12 +4,12 @@
   <body>
     <%- include("partials/nav.ejs") %>
 
-    <div class="container mt-4">
+    <div class="container mt-4 bg-info">
       <h2 class="text-center mb-4">Your Schedule</h2>
       <ul class="list-group">
         <% courses.forEach(course => { %>
         <li
-          class="list-group-item d-flex justify-content-between align-items-center"
+          class="list-group-item d-flex justify-content-between align-items-center mb-2"
         >
           <div>
             <strong><%= course.name %></strong> - <%= course.credits %> credits
