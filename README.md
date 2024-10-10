@@ -15,3 +15,5 @@ Login information
 
 - student@google.com student
 - teacher@google.com teacher
+
+*Teacher accounts can't not be made. Please use teacher@google.com
